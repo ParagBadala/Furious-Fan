@@ -1,0 +1,79 @@
+<div class="card-body" *ngIf="_movie$ | async as movie">
+    <form #movieForm="ngForm">
+      <fieldset>
+        <legend>Basic Movie Information</legend>
+  
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="inputMovieTitle">Movie Title</label>
+          <div class="col-md-8">
+            <input class="form-control" 
+                   id="inputMovieTitle" 
+                   type="text" 
+                   placeholder="Title" 
+                   [(ngModel)]="movie.title" 
+                   name="title" 
+                   #titleVar="ngModel" 
+                   required
+                   minlength="3"
+                   maxlength="50"
+                   [ngClass]="{'is-invalid': (titleVar.touched || titleVar.dirty) && !titleVar.valid }"/>
+              <span class="invalid-feedback">
+                <span *ngIf="titleVar.errors?.required">
+                  Please enter a movie title.
+                </span>
+                <span *ngIf="titleVar.errors?.minlength">
+                  The movie title must be at least 3 characters.
+                 </span>
+                <span *ngIf="titleVar.errors?.maxlength">
+                  The movie title cannot exceed 50 characters.
+                </span>
+              </span>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="inputMovieDirector">Director</label>
+          <div class="col-md-8">
+            <input class="form-control" 
+                   id="inputMovieDirector" 
+                   type="text" 
+                   placeholder="Director" 
+                   [(ngModel)]="movie.director" 
+                   name="director" 
+                   #directorVar="ngModel" 
+                   required
+                   minlength="3"
+                   maxlength="50"
+                   [ngClass]="{'is-invalid': (titleVar.touched || titleVar.dirty) && !titleVar.valid }"/>
+            <span class="invalid-feedback">
+              <span *ngIf="titleVar.errors?.required">
+                 Please enter a movie director.
+              </span>
+              <span *ngIf="titleVar.errors?.minlength">
+                The movie director must be at least 3 characters.
+              </span>
+              <span *ngIf="titleVar.errors?.maxlength">
+                The movie director cannot exceed 50 characters.
+              </span>
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="inputStarRating">Star Rating (1-5)</label>
+          <div class="col-md-8">
+            <input class="form-control" id="inputStarRating" type="number" placeholder="Rating" [(ngModel)]="movie.starRating"
+              name="starRating" #starRatingVar="ngModel" />
+          </div>
+        </div>
+  
+        <div class="form-group row">
+          <label class="col-md-2 col-form-label" for="inputMovieDescription">Description</label>
+          <div class="col-md-8">
+            <textarea class="form-control" id="inputMovieDescription" placeholder="Description" rows=3 [(ngModel)]="movie.description"
+              name="description" #descriptionVar="ngModel"></textarea>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
